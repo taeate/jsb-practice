@@ -1,9 +1,9 @@
 package com.ll.sbb;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -16,20 +16,19 @@ class SbbApplicationTests {
 	@Autowired
 	private QuestionRepository questionRepository;
 
+	@Autowired
+	private AnswerRepository answerRepository;
+
 	@Test
 	void testJpa() {
-		// <findAll>
+		Optional<Question> oq = this.questionRepository.findById(2);
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
 
-		// List<Question> all = this.questionRepository.findAll();
-		// assertEquals(2, all.size());
-		// Question q = all.get(0);
-		// assertEquals("이즈리얼은 원딜인가요?",q.getSubject());
-
-
-			// <findById>
-		Optional<Question> oq = this.questionRepository.findById(1);
-		if (oq.isPresent()) {
-			Question q = oq.get();
-			assertEquals("이즈리얼은 원딜인가요?",q.getSubject());
-}
+		Answer a = new Answer();
+		a.setContent("네 원딜입니다.");
+		a.setQuestion(q);
+		a.setCreatedDate(LocalDateTime.now());
+		this.answerRepository.save(a);
+	}
 }
