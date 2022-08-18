@@ -1,4 +1,4 @@
-package com.ll.sbb;
+package com.ll.sbb.answer;
 
 import java.time.LocalDateTime;
 
@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.ll.sbb.question.Question;
 
 import lombok.Getter;
 import lombok.Setter;
