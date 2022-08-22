@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
-
+@RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
 public class QuestionController {
 
   private final QuestionService questionService;
   
-  @RequestMapping("/question/list")
+  @RequestMapping("/list")
   public String list(Model model){
 
     List<Question> questionList = this.questionService.getList();
@@ -25,8 +25,11 @@ public class QuestionController {
     return "question_list";
   }
 
-  @RequestMapping(value = "/question/detail/{id}")
+  @RequestMapping(value = "/detail/{id}")
   public String detail(Model model, @PathVariable("id") Integer id){
+    Question question = this.questionService.getQuestion(id);
+    model.addAttribute("question", question);
+
     return "question_detail";
   }
 }
